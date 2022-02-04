@@ -5,7 +5,9 @@
 
 # Do/don't throw stuff when autofighting
 autofight_throw = true
-autofight_throw_nomove = true
+# if you enable the latter, tab is autofight_no_move
+# autofight_throw_nomove = true
+# probably better to have a separate key for that
 bindkey = [;] CMD_AUTOFIGHT_NOMOVE
 # If true. items are autofired stopping at the monsters feet (same as firing using .)
 autofight_fire_stop = false
