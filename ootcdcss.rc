@@ -556,10 +556,14 @@ function force_mores()
 end
 
 init_force_mores()
-
+}
 -------------------------
 ---- End force_mores ----
 -------------------------
+# The ready() function is needed
+# for code that has to process each turn 
+# or UI action.
+
 {
 function ready()
 
@@ -571,4 +575,6 @@ function ready()
 
   -- force_mores.lua
   force_mores()
+
+end
 }
