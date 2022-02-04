@@ -1,0 +1,574 @@
+#############
+# Autofight #
+#############
+# make sure to adjust these to your playstyle!!!
+
+# Do/don't throw stuff when autofighting
+autofight_throw = true
+autofight_throw_nomove = true
+bindkey = [;] CMD_AUTOFIGHT_NOMOVE
+# If true. items are autofired stopping at the monsters feet (same as firing using .)
+autofight_fire_stop = false
+
+fire_order  = launcher, return
+fire_order += rock, javelin, tomahawk, stone
+
+# Prevent me from tab-fighting to death by keeping this high
+autofight_stop = 67
+
+### this section is sorta outdated cuz you can quiver spells, that said, it could cool to have both maybe
+## Enable this if you want automagic attacks
+#automagic_enable = false
+#automagic_slot = a
+## Percentage of MP to stop automagic at
+#automagic_stop = 50
+## If set to true, resort to melee when automagic_stop is active
+#automagic_fight = true
+
+default_manual_training = true
+default_show_all_skills = true
+skill_focus = false
+
+hp_warning = 50
+mp_warning = 50
+hp_colour = 100:green, 99:lightgrey, 80:yellow, 70:lightred, 50:red
+mp_colour = 100:green, 99:lightgrey, 80:yellow, 70:lightred, 50:red
+stat_colour = 3:red, 7:lightred
+
+show_god_gift = yes
+
+
+sort_menus = true
+equip_unequip = true
+
+
+# AUTO TRAVEL
+travel_delay = -1
+explore_delay = -1
+show_travel_trail = true
+travel_open_doors = true
+autofight_caught = true
+
+explore_stop = glowing_items,artefacts,greedy_pickup_smart
+explore_stop += stairs,shops
+explore_stop += altars,portals,branches,runed_doors
+explore_stop += greedy_visited_item_stack
+
+explore_wall_bias = 5
+travel_key_stop = true
+# don't blunder into krakens in shoals while flying!
+# set to shallow water for extra safety if you want
+travel_avoid_terrain = deep water
+
+: if you.god() ~= "Trog" or you.spirit_shield() > 0 then
+rest_wait_both = true
+: end
+
+explore_auto_rest = true
+rest_wait_ancestor = true
+
+################
+### Messages ###
+################
+
+channel.multiturn = mute
+
+msc := message_colour
+msc += mute:returns to your side
+msc += mute:a demon appears
+msc += mute:puff of smoke
+msc += mute:carefully avoids
+msc += mute:is recalled
+msc += mute:wall.*burn.*your
+msc += mute:dissolves? into (sparkling lights|shadows)
+msc += mute:(crumbles|melts) away\.
+msc += mute:(merges|forms) itself .* the air
+msc += mute:you swap places
+msc += mute:your.*(looks stronger|shudders|resists)
+msc += mute:your.*(stumbles backwards|holds.*ground)
+msc += mute:your.*(blinks|safely over)
+msc += mute:(phases out.*|misses) (your|something).*
+msc += mute:your.*(picks up|drops)
+msc += mute:your.*basks in the mutagenic energy
+msc += mute:your.*(struggles|tears|pulls away).*(web|net)
+
+more := force_more_message
+: if you.god() == "Ashenzari" then
+more += You have a vision of.*gates?
+: end
+
+more += The mighty Pandemonium lord .* resides here
+
+# Interrupts
+more += You don't .* that spell
+more += You fail to use your ability
+more += You miscast.*(Blink|Borgnjor|Door|Invisibility)
+more += You can't (read|drink|do)
+more += You cannot .* while unable to breathe
+more += You cannot .* in your current state
+more += when .*silenced
+more += too confused
+more += There's something in the way
+more += There's nothing to (close|open) nearby
+more += not good enough to have a special ability
+more += You are too berserk
+more += no means to grasp
+more += That item cannot be evoked
+more += You are held in a net
+more += You don't have any such object
+more += You can't unwield
+more += enough magic points
+more += You don't have the energy to cast that spell
+more += You are unable to access your magic
+
+# Bad things
+more += Your surroundings flicker
+more += You cannot teleport right now
+more += A sentinel's mark forms upon you
+more += (blundered into a|invokes the power of) Zot
+more += enter a teleport trap
+more += Ouch! That really hurt!
+more += dispelling energy hits you
+more += You are blasted by holy energy!
+more += You are (blasted|electrocuted)!
+more += You are.*(confused|poisoned)
+more += god:(sends|finds|silent|anger)
+more += You feel a surge of divine spite
+more += disloyal to dabble
+more += lose consciousness
+more += You are too injured to fight blindly
+more += calcifying dust hits
+more += Space warps.*around you
+more += Space bends around you
+more += watched by something
+more += flickers and vanishes!
+more += doesn't seem very happy
+more += is no longer charmed
+
+# Hell effects
+more += hell_effect:
+
+# Expiring effects
+more += You feel yourself slow down
+more += You are starting to lose your buoyancy
+more += Your hearing returns
+more += Your transformation is almost over
+more += You have a feeling this form
+more += You feel yourself come back to life
+more += time is quickly running out
+more += life is in your own hands
+more += You start to feel a little slower
+more += You feel less protected from missiles
+
+# Others
+more += You have reached level
+more += You rejoin the land of the living
+more += You have finished (your manual|forgetting about)
+more += Your scales start
+more += You feel monstrous
+more += Jiyva alters your body
+: if you.god() == "Xom" then
+more += god:
+: end
+
+# Dangerous monsters we force_more when first seen.
+# Things with ranged (or extremely fast), irresistable effects.
+more += ((floating|shining) eye|dream sheep|death drake).*into view
+more += (wretched star|apocalypse crab|death drake).*into view
+more += (entropy weaver|torpor snail|spriggan druid).*into view
+more += (vault (warden|sentinel)|merfolk (avatar|siren)).*into view
+more += (guardian serpent|draconian shifter|convoker|death cob).*into view
+more += (phantasmal warrior|air elemental).*into view
+# Paralysis/Petrify/Banish
+more += (orc sorcerer|(?<!orc )wizard|ogre mage|great orb of eyes|sphinx).*into view
+more += (vampire knight|basilisk|deep elf (sorcerer|demonologist)).*into view
+# Torment/flay or hellfire
+more += (flayed ghost|greater mummy|mummy priest|fiend|tzitzimitl).*into view
+more += (tormentor|curse toe|curse skull|hell sentinel|hellion).*into view
+more += (deep elf (sorcerer|high priest)|draconian scorcher).*into view
+# Things that can hit for over 90+ damage in a turn that is either ranged or
+# very fast.
+more += ((deep elf|draconian) annihilator|tengu reaver).*into view
+more += (lich|orb of fire|executioner|juggernaut|shrike).*into view
+
+# Any uniques and any pan lords
+more += (?-i:[A-Z]).* comes? into view
+
+stop := runrest_stop_message
+ignore := runrest_ignore_message
+
+:if you.god() == "Xom" then
+stop += god:
+:else
+ignore += god:
+:end
+
+# Bad things
+stop += A huge blade swings out and slices into you
+stop += starving
+stop += wrath finds you
+stop += lose consciousness
+stop += hell_effect:
+
+# Expiring effects
+stop += You feel yourself slow down
+stop += You are starting to lose your buoyancy
+stop += Your hearing returns
+stop += Your transformation is almost over
+stop += back to life
+stop += time is quickly running out
+stop += life is in your own hands
+stop += is no longer charmed
+
+# Annoyances
+ignore += grinding sound
+ignore += contamination has completely
+ignore += your breath back
+
+ignore += pray:
+ignore += talk:
+ignore += talk_visual:
+ignore += friend_spell:
+ignore += friend_enchant:
+ignore += friend_action:
+ignore += sound:
+
+###########################
+### Spell/Ability slots ###
+###########################
+
+ability_slot += Fly|flight:lF
+ability_slot += Stop Flying:L
+ability_slot += Breathe:t
+ability_slot += Invisibility:iv
+# Abilities prone to miskeys.
+ability_slot += Blink:IB
+ability_slot += Berserk:k
+ability_slot += Corrupt:C
+ability_slot += Enter the Abyss:E
+
+##################
+### Item slots ###
+##################
+
+## Rings, in order of letter used.
+item_slot += ring of dexterity : Dd
+item_slot += ring of evasion : Ee
+item_slot += ring of .*fire : Ff
+item_slot += ring of (ice|protection from cold) : Cc
+item_slot += ring of intelligence : Ii
+item_slot += ring of flight : L
+item_slot += ring of magical power : Mm
+item_slot += ring of positive energy : Nn
+item_slot += ring of poison resistance : P
+item_slot += ring of resist corrosion : R
+item_slot += ring of strength : Ss
+item_slot += ring of see invisible : v
+item_slot += ring of willpower: Ww
+# Need numeric match to not trigger for rF/rC rings
+item_slot += \+[0-9]+ ring of protection : Tt
+item_slot += ring of slaying : Yy
+item_slot += ring of wizardry : Zz
+
+########################
+### Autoinscriptions ###
+########################
+
+show_god_gift = unident
+
+ai := autoinscribe
+
+ai += potions? of berserk rage:!q
+ai += scrolls? of silence:!r
+
+ai += of faith:!P
+ai += manual of:!d
+# Prevent melee with all staves; if we want to melee with one, it's safe to
+# require removing the annotation.
+ai += magical staff:!a
+ai += (large rock|throwing net|curare|of dispersal):=f
+
+# Convenient shortcuts
+ai += curing:@q1
+ai += potions? of heal wounds:@q2
+ai += potions? of haste:@q3
+ai += scrolls? of teleportation:@r2
+ai += identify:@r1
+
+##############
+### Morgue ###
+##############
+
+note_hp_percent = 10
+note_all_skill_levels = true
+note_chat_messages = false
+user_note_prefix = >>
+
+note_items += experience,of resistance, Archmagi
+note_items += crystal plate armour,pearl dragon scales
+note_items += artefact
+note_messages += You feel monstrous
+note_messages += You pass through the gate
+note_messages += cast .* Abyss
+
+# Noteable monsters
+# Undead
+note_monsters += ancient lich,curse skull,curse toe,greater mummy
+# Depths
+note_monsters += caustic shrike
+# Special hall_of_zot spawns
+note_monsters += killer klown,electric golem,orb of fire
+
+dump_message_count = 30
+dump_order  = header,hiscore,stats,misc,mutations,skills,spells,inventory
+dump_order += overview,screenshot,monlist,messages,skill_gains,action_counts
+dump_order += vaults,notes,kills,turns_by_place,xp_by_level
+
+# Portals
+
+more += ticking.*clock
+more += dying ticks
+more += distant snort
+more += coins.*counted
+more += tolling.*bell
+more += roar of battle
+more += creaking.*portcullis
+more += portcullis is probably
+more += wave of frost
+more += crackling.*melting
+more += hiss.*sand
+more += sound.*rushing water
+more += rusting.*drain
+more += drain falling apart
+more += heat about you
+more += falling.*rocks
+more += rumble.*avalanche of rocks
+more += crackle.*arcane power
+more += crackle.*magical portal
+more += distant wind
+more += whistling.*wind
+more += rapidly growing quiet
+
+# Flash
+flash := flash_screen_message
+flash += Your life is in your own hands
+flash += Your time is quickly running out
+
+# AUTO EXCLUDE
+
+# Forcemore any uniques and any pan lords
+more += (?-i:[A-Z]).* comes? into view
+
+## dangerous monsters ##
+auto_exclude += ancient lich, death drake, hydra, ice statue, jelly, orb of fire
+
+## paralysing monsters and uniques ##
+auto_exclude += [^c] wizard, ancient lich, Ereshkigal, Erolcha, eyeball, Grinder, Jory, lich
+auto_exclude += Norris, ogre-mage, orb of eyes, orc sorcerer, Rupert, sphinx, vampire knight
+
+## other uniques and unique followers ##
+auto_exclude += Agnes, Aizul, Arachne, Asterion, Blork, Boris, Crazy Yiuf, Donald, Dowan
+auto_exclude += Duvessa, Edmund, Erica, Eustachio, Fannar, Frances, Frederick, Gastronok
+auto_exclude += Grum, Harold, Ijyb, Jessica, Jorgrun, Joseph, Kirke, Louise, Mara, Maud
+auto_exclude += Maurice, Menkaure, Mennas, Natasha, Nergalle, Nessos, Nikola, Pikel
+auto_exclude += Polyphemus, Prince Ribbit, Psyche, Roxanne, Saint Roka, Sigmund, Snorg
+auto_exclude += Sojobo, Sonja, Terence, Urug, Wiglaf, Xtahua, hog, lemure
+
+###########
+### Lua ###
+###########
+
+{
+-- Equipment autopickup (by Medar and various others)
+local function pickup_equipment(it, name)
+  if it.is_useless then return end
+
+  local class = it.class(true)
+  if class == "armour" then
+    local good_slots = {cloak="Cloak", helmet="Helmet",
+                        gloves="Gloves", boots="Boots"}
+    st, _ = it.subtype()
+
+    -- Autopickup found aux armour if 1) we don't have any or 2) it's artefact,
+    -- or 3) if we don't have artefact or ego armour, and the found armour is
+    -- ego.
+    if good_slots[st] ~= nil then
+      if good_slots[st] == "Gloves" and you.has_claws() > 0 then return end
+
+      if it.artefact then return true end
+
+      local cur = items.equipped_at(good_slots[st])
+      if cur == nil then return true end
+
+      if cur.branded or cur.artefact then return end
+      if it.branded then return true end
+      -- Autopickup found body armour of the same kind we're wearing, according
+      -- to conditions (2) and (3) above used for aux slots.
+    elseif st == "body" then
+      local cur = items.equipped_at("armour")
+      if cur == nil then return end
+      if cur.name("qual") ~= it.name("qual") then return end
+
+      if it.artefact then return true end
+
+      if cur.branded or cur.artefact then return end
+      if it.branded then return true end
+    end
+  end
+  return
+end
+
+add_autopickup_func(pickup_equipment)
+
+---------------------------
+---- Begin force_mores ----
+---------------------------
+
+-- See README.md for documentation.
+
+last_turn = you.turns()
+
+-- Each entry must have a 'name' field with a descriptive name, a 'pattern'
+-- field, a 'cond' field giving the condition type, and a 'cutoff' field giving
+-- the max value for where the force_more will apply. Possible values for
+-- 'cond' are xl and maxhp.
+--
+-- The 'pattern' field's value can be either a regexp string or array of regexp
+-- strings matching the appropriate monster(s). Any values are joined by "|" to
+-- make a new force_more of the form:
+--
+-- ((?!spectral )VALUE1|VALUE2|...)(?! (skeleton|zombie|simularcrum)).*into view".
+--
+-- To allow derived undead forms of a monster to match, include 'spectral ' at
+-- the beginning of and/or ' (skeleton|zombie|simularcrum)' at the end of your
+-- pattern for that monster.
+fm_patterns = {
+  -- Fast, early game Dungeon problems for chars with low mhp.
+  {name = "30mhp", cond = "maxhp", cutoff = 30,
+   pattern = "adder|hound"},
+  -- Dungeon monsters that can damage you for close to 50% of your mhp with a
+  -- ranged attack.
+  {name = "40mhp", cond = "maxhp", cutoff = 40,
+   pattern = "orc priest|electric eel"},
+  {name = "60mhp", cond = "maxhp", cutoff = 60,
+   pattern = "acid dragon|steam dragon|manticore"},
+  {name = "70mhp", cond = "maxhp", cutoff = 70,
+   pattern = "centaur(?! warrior)|meliai|yaktaur(?! captain)"},
+  {name = "80mhp", cond = "maxhp", cutoff = 80,
+   pattern = "gargoyle|orc (warlord|knight)"},
+  {name = "90mhp", cond = "maxhp", cutoff = 90,
+   pattern = {"centaur warrior", "deep elf archer", "efreet",
+              "molten gargoyle", "tengu conjurer"} },
+  {name = "110mhp", cond = "maxhp", cutoff = 110,
+   pattern = {"centaur warrior", "deep elf (mage|knight)", "cyclops", "efreet",
+              "molten gargoyle", "tengu conjurer", "yaktaur captain",
+              "necromancer", "deep troll earth mage", "hell knight",
+              "stone giant"} },
+  {name = "160mhp", cond = "maxhp", cutoff = 160,
+   pattern = {"(fire|ice|quicksilver|shadow|storm) dragon",
+              "(fire|frost) giant", "war gargoyle",
+              "draconian (knight|stormcaller"} },
+} -- end fm_patterns
+
+active_fm = {}
+-- Set to true to get a message when the fm change
+notify_fm = false
+
+-- Wrapper of crawl.mpr() that prints text in white by default.
+if not mpr then
+  mpr = function (msg, color)
+    if not color then
+      color = "white"
+    end
+    crawl.mpr("<" .. color .. ">" .. msg .. "</" .. color .. ">")
+  end
+end
+
+function init_force_mores()
+  for i,v in ipairs(fm_patterns) do
+    active_fm[#active_fm + 1] = false
+  end
+end
+
+function update_force_mores()
+  local activated = {}
+  local deactivated = {}
+  local hp, maxhp = you.hp()
+  for i,v in ipairs(fm_patterns) do
+    local msg = nil
+    if type(v.pattern) == "table" then
+      for j, p in ipairs(v.pattern) do
+        if msg == nil then
+          msg = p
+        else
+          msg = msg .. "|" .. p
+        end
+      end
+    else
+      msg = v.pattern
+    end
+    msg = "(?<!spectral )(" .. msg .. ")(?! (skeleton|zombie|simulacrum)).*into view"
+    local action = nil
+    local fm_name = v.pattern
+    if v.name then
+      fm_name = v.name
+    end
+    if not v.cond and not active_fm[i] then
+      action = "+"
+    elseif v.cond == "xl" then
+      if active_fm[i] and you.xl() >= v.cutoff then
+        action = "-"
+      elseif not active_fm[i] and you.xl() < v.cutoff then
+        action = "+"
+      end
+    elseif v.cond == "maxhp" then
+      if active_fm[i] and maxhp >= v.cutoff then
+        action = "-"
+      elseif not active_fm[i] and maxhp < v.cutoff then
+        action = "+"
+      end
+    end
+    if action == "+" then
+      activated[#activated + 1] = fm_name
+    elseif action == "-" then
+      deactivated[#deactivated + 1] = fm_name
+    end
+    if action ~= nil then
+      local opt = "force_more_message " .. action .. "= " .. msg
+      crawl.setopt(opt)
+      active_fm[i] = not active_fm[i]
+    end
+  end
+  if #activated > 0 and notify_fm then
+    mpr("Activating force_mores: " .. table.concat(activated, ", "))
+  end
+  if #deactivated > 0 and notify_fm then
+    mpr("Deactivating force_mores: " .. table.concat(deactivated, ", "))
+  end
+end
+
+local last_turn = nil
+function force_mores()
+  if last_turn ~= you.turns() then
+    update_force_mores()
+    last_turn = you.turns()
+  end
+end
+
+init_force_mores()
+
+-------------------------
+---- End force_mores ----
+-------------------------
+{
+function ready()
+
+  -- Open skill screen on turn 0.
+  if not skills_set and you.turns() == 0 then
+      crawl.sendkeys("m")
+      skills_set = true
+  end
+
+  -- force_mores.lua
+  force_mores()
+}
