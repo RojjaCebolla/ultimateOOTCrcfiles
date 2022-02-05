@@ -3,7 +3,7 @@
 #############
 # make sure to adjust these to your playstyle!!!
 
-# if you enable the latter, tab is autofight_no_move
+# if you enable the following, tab becomes autofight_no_move... which can be annoying but it's uuuusually better to let them come to you, not walk to them
 
 # Do/don't throw stuff when autofighting
 #autofight_throw = true
@@ -14,8 +14,8 @@ bindkey = [;] CMD_AUTOFIGHT_NOMOVE
 # If true. items are autofired stopping at the monsters feet (same as firing using .)
 autofight_fire_stop = false
 
-fire_order  = launcher, return
-fire_order += rock, javelin, tomahawk, stone
+show_more = false
+small_more = true
 
 # Prevent me from tab-fighting to death by keeping this high
 autofight_stop = 67
