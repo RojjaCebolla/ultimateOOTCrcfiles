@@ -29,15 +29,17 @@ autofight_stop = 67
 ## If set to true, resort to melee when automagic_stop is active
 #automagic_fight = true
 
+
 default_manual_training = true
 default_show_all_skills = true
-skill_focus = false
+skill_focus = true
 
 hp_warning = 50
 mp_warning = 50
 hp_colour = 100:green, 99:lightgrey, 80:yellow, 70:lightred, 50:red
 mp_colour = 100:green, 99:lightgrey, 80:yellow, 70:lightred, 50:red
 stat_colour = 3:red, 7:lightred
+cloud_status = true
 
 show_god_gift = yes
 
@@ -117,7 +119,6 @@ more += There's nothing to (close|open) nearby
 more += not good enough to have a special ability
 more += You are too berserk
 more += no means to grasp
-more += That item cannot be evoked
 more += You are held in a net
 more += You don't have any such object
 more += You can't unwield
@@ -135,7 +136,7 @@ more += Ouch! That really hurt!
 more += dispelling energy hits you
 more += You are blasted by holy energy!
 more += You are (blasted|electrocuted)!
-more += You are.*(confused|poisoned)
+more += You are.*(confused)
 more += god:(sends|finds|silent|anger)
 more += You feel a surge of divine spite
 more += disloyal to dabble
@@ -169,6 +170,7 @@ more += You have reached level
 more += You rejoin the land of the living
 more += You have finished (your manual|forgetting about)
 more += Your scales start
+more += offers
 more += You feel monstrous
 more += Jiyva alters your body
 : if you.god() == "Xom" then
