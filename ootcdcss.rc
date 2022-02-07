@@ -29,7 +29,6 @@ autofight_stop = 67
 ## If set to true, resort to melee when automagic_stop is active
 #automagic_fight = true
 
-
 default_manual_training = true
 default_show_all_skills = true
 skill_focus = true
@@ -210,7 +209,7 @@ ignore += god:
 :end
 
 # Bad things
-stop += A huge blade swings out and slices into you
+stop += a shaft
 stop += starving
 stop += wrath finds you
 stop += lose consciousness
@@ -232,8 +231,8 @@ ignore += contamination has completely
 ignore += your breath back
 
 ignore += pray:
-ignore += talk:
-ignore += talk_visual:
+# ignore += talk:
+# ignore += talk_visual:
 ignore += friend_spell:
 ignore += friend_enchant:
 ignore += friend_action:
