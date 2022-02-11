@@ -1,37 +1,64 @@
-#############
-# Autofight #
-#############
-# make sure to adjust these to your playstyle!!!
+#### BIGGER TILES ####
+#### for webtiles ####
+# default size is 32
+tile_cell_pixels = 48
 
-# if you enable the following, tab becomes autofight_no_move... which can be annoying but it's uuuusually better to let them come to you, not walk to them
+##############
+#   Basics   #
+##############
 
-# Do/don't throw stuff when autofighting
-#autofight_throw = true
-#autofight_throw_nomove = true
-
-# probably better to have a separate key for that. here it is:
-bindkey = [;] CMD_AUTOFIGHT_NOMOVE
-# If true. items are autofired stopping at the monsters feet (same as firing using .)
-autofight_fire_stop = false
-
+# don't stop for combat log spam
 show_more = false
+# when you *do* show a -MORE- prompt, write it atop the last message
 small_more = true
+# if you set this to true, the message log empties every turn.
+# (it only shows the latest turn's messages, in other words.)
+clear_messages = false
 
-# Prevent me from tab-fighting to death by keeping this high
-autofight_stop = 67
+show_god_gift = yes
+sort_menus = true
+equip_unequip = true
 
-### this section is sorta outdated cuz you can quiver spells, that said, it could cool to have both maybe
-## Enable this if you want automagic attacks
-#automagic_enable = false
-#automagic_slot = a
-## Percentage of MP to stop automagic at
-#automagic_stop = 50
-## If set to true, resort to melee when automagic_stop is active
-#automagic_fight = true
-
+# skill training options
 default_manual_training = true
 default_show_all_skills = true
 skill_focus = true
+
+#############
+# Autofight #
+#############
+# make sure to adjust autofight settings to your playstyle!!!
+
+### if you enable the following stuff, tab becomes autofight_no_move...
+###hich can be annoying but it's uuuusually better to let them come to you,
+###instead of walking up to them
+### Do/don't throw stuff when autofighting
+###autofight_throw = true
+###autofight_throw_nomove = true
+
+# probably better to have a separate key for that behavior though.
+#here it is:
+bindkey = [;] CMD_AUTOFIGHT_NOMOVE
+
+# If true, items are autofired stopping at the monsters feet (same as firing using .)
+# If false, missed projectiles continue to possibly hit whatever's behind the monster
+# or fall into the water.
+autofight_fire_stop = false
+
+# Prevent me from tab-fighting to death by keeping this high
+autofight_stop = 65
+# bust out of nets while tabbing
+autofight_caught = true
+
+### this section is sorta outdated cuz you can quiver spells
+### that said, it could cool to use both automagic and spell quivering?
+## Enable this if you want automagic attacks
+## automagic_enable = false
+## automagic_slot = a
+## Percentage of MP to stop automagic at
+## automagic_stop = 50
+## If set to true, resort to melee when automagic_stop is active
+## automagic_fight = true
 
 hp_warning = 50
 mp_warning = 50
@@ -40,27 +67,30 @@ mp_colour = 100:green, 99:lightgrey, 80:yellow, 70:lightred, 50:red
 stat_colour = 3:red, 7:lightred
 cloud_status = true
 
-show_god_gift = yes
+##############
+# Autotravel #
+##############
 
-
-sort_menus = true
-equip_unequip = true
-
-
-# AUTO TRAVEL
-travel_delay = -1
-explore_delay = -1
 show_travel_trail = true
-travel_open_doors = true
-autofight_caught = true
+travel_key_stop = true
+# stick somewhat closer to walls rather than waltz across open areas
+explore_wall_bias = 5
+# teleport to destination when traveling somewhere specific
+travel_delay = -1
+# teleport to destination when autoexploring
+explore_delay = -1
+
+#### doors can make loud noises. ####
+# set autoexplore to "avoid" opening doors if you'd prefer to do it yourself.
+# this is important for stealthy types, also nice for general survival.
+# shadowrider38 would probably find it annoying, however
+# travel_open_doors = avoid
 
 explore_stop = glowing_items,artefacts,greedy_pickup_smart
 explore_stop += stairs,shops
 explore_stop += altars,portals,branches,runed_doors
 explore_stop += greedy_visited_item_stack
 
-explore_wall_bias = 5
-travel_key_stop = true
 # don't blunder into krakens in shoals while flying!
 # set to shallow water for extra safety if you want
 travel_avoid_terrain = deep water
@@ -97,6 +127,9 @@ msc += mute:your.*(picks up|drops)
 msc += mute:your.*basks in the mutagenic energy
 msc += mute:your.*(struggles|tears|pulls away).*(web|net)
 
+
+## FORCE MORE ##
+
 more := force_more_message
 : if you.god() == "Ashenzari" then
 more += You have a vision of.*gates?
@@ -105,19 +138,22 @@ more += You have a vision of.*gates?
 more += The mighty Pandemonium lord .* resides here
 
 # Interrupts
+# spicycat: i'm commenting out things that seem annoying,
+# but for more safety you could un-comment them.
+# more += There's nothing to (close|open) nearby
+# more += not good enough to have a special ability
+# more += no means to grasp
 more += You don't .* that spell
 more += You fail to use your ability
-more += You miscast.*(Blink|Borgnjor|Door|Invisibility)
+more += You miscast.*(Borgnjor|Door|Invisibility)
 more += You can't (read|drink|do)
 more += You cannot .* while unable to breathe
 more += You cannot .* in your current state
 more += when .*silenced
 more += too confused
 more += There's something in the way
-more += There's nothing to (close|open) nearby
-more += not good enough to have a special ability
 more += You are too berserk
-more += no means to grasp
+more += That item cannot be evoked
 more += You are held in a net
 more += You don't have any such object
 more += You can't unwield
@@ -139,30 +175,23 @@ more += You are.*(confused)
 more += god:(sends|finds|silent|anger)
 more += You feel a surge of divine spite
 more += disloyal to dabble
-more += lose consciousness
 more += You are too injured to fight blindly
 more += calcifying dust hits
 more += Space warps.*around you
 more += Space bends around you
+: if you.god() ~= "Trog" or you.spirit_shield() > 0 then
 more += watched by something
-more += flickers and vanishes!
+: end
 more += doesn't seem very happy
 more += is no longer charmed
 
 # Hell effects
 more += hell_effect:
 
-# Expiring effects
-more += You feel yourself slow down
-more += You are starting to lose your buoyancy
-more += Your hearing returns
-more += Your transformation is almost over
-more += You have a feeling this form
+# Expiring effects #
+# (most of these are covered with a runrest_stop_message now)
 more += You feel yourself come back to life
-more += time is quickly running out
-more += life is in your own hands
 more += You start to feel a little slower
-more += You feel less protected from missiles
 
 # Others
 more += You have reached level
@@ -171,7 +200,7 @@ more += You have finished (your manual|forgetting about)
 more += Your scales start
 more += offers
 more += You feel monstrous
-more += Jiyva alters your body
+more += Jiyva alters you
 : if you.god() == "Xom" then
 more += god:
 : end
@@ -181,7 +210,8 @@ more += god:
 more += ((floating|shining) eye|dream sheep|death drake).*into view
 more += (wretched star|apocalypse crab|death drake).*into view
 more += (entropy weaver|torpor snail|spriggan druid).*into view
-more += (vault (warden|sentinel)|merfolk (avatar|siren)).*into view
+more += (vault warden|merfolk (avatar|siren)).*into view
+more += meliai.*into view
 more += (guardian serpent|draconian shifter|convoker|death cob).*into view
 more += (phantasmal warrior|air elemental).*into view
 # Paralysis/Petrify/Banish
@@ -210,10 +240,10 @@ ignore += god:
 
 # Bad things
 stop += a shaft
-stop += starving
 stop += wrath finds you
 stop += lose consciousness
 stop += hell_effect:
+stop += flickers and vanishes!
 
 # Expiring effects
 stop += You feel yourself slow down
@@ -221,18 +251,45 @@ stop += You are starting to lose your buoyancy
 stop += Your hearing returns
 stop += Your transformation is almost over
 stop += back to life
+stop += You have a feeling this form
 stop += time is quickly running out
 stop += life is in your own hands
-stop += is no longer charmed
+stop += You feel less protected from missiles
+# stop += is no longer charmed
+
+# Portals
+
+stop += ticking.*clock
+stop += dying ticks
+stop += distant snort
+stop += coins.*counted
+stop += tolling.*bell
+stop += roar of battle
+stop += creaking.*portcullis
+stop += portcullis is probably
+stop += wave of frost
+stop += crackling.*melting
+stop += hiss.*sand
+stop += sound.*rushing water
+stop += rusting.*drain
+stop += drain falling apart
+stop += heat about you
+stop += falling.*rocks
+stop += rumble.*avalanche of rocks
+stop += crackle.*arcane power
+stop += crackle.*magical portal
+stop += distant wind
+stop += whistling.*wind
+stop += rapidly growing quiet
 
 # Annoyances
 ignore += grinding sound
 ignore += contamination has completely
 ignore += your breath back
 
-ignore += pray:
-# ignore += talk:
-# ignore += talk_visual:
+#ignore += pray:
+#ignore += talk:
+#ignore += talk_visual:
 ignore += friend_spell:
 ignore += friend_enchant:
 ignore += friend_action:
@@ -324,48 +381,25 @@ note_monsters += caustic shrike
 # Special hall_of_zot spawns
 note_monsters += killer klown,electric golem,orb of fire
 
+dump_on_save = true
 dump_message_count = 30
 dump_order  = header,hiscore,stats,misc,mutations,skills,spells,inventory
 dump_order += overview,screenshot,monlist,messages,skill_gains,action_counts
 dump_order += vaults,notes,kills,turns_by_place,xp_by_level
 
-# Portals
-
-more += ticking.*clock
-more += dying ticks
-more += distant snort
-more += coins.*counted
-more += tolling.*bell
-more += roar of battle
-more += creaking.*portcullis
-more += portcullis is probably
-more += wave of frost
-more += crackling.*melting
-more += hiss.*sand
-more += sound.*rushing water
-more += rusting.*drain
-more += drain falling apart
-more += heat about you
-more += falling.*rocks
-more += rumble.*avalanche of rocks
-more += crackle.*arcane power
-more += crackle.*magical portal
-more += distant wind
-more += whistling.*wind
-more += rapidly growing quiet
 
 # Flash
 flash := flash_screen_message
 flash += Your life is in your own hands
 flash += Your time is quickly running out
+: if you.god() ~= "Lugonu" then
+flash += of distortion
+: end
 
 # AUTO EXCLUDE
 
-# Forcemore any uniques and any pan lords
-more += (?-i:[A-Z]).* comes? into view
-
 ## dangerous monsters ##
-auto_exclude += ancient lich, death drake, hydra, ice statue, jelly, orb of fire
+auto_exclude += death drake, hydra, ice statue, jelly, orb of fire, meliai
 
 ## paralysing monsters and uniques ##
 auto_exclude += [^c] wizard, ancient lich, Ereshkigal, Erolcha, eyeball, Grinder, Jory, lich
@@ -375,7 +409,7 @@ auto_exclude += Norris, ogre-mage, orb of eyes, orc sorcerer, Rupert, sphinx, va
 auto_exclude += Agnes, Aizul, Arachne, Asterion, Blork, Boris, Crazy Yiuf, Donald, Dowan
 auto_exclude += Duvessa, Edmund, Erica, Eustachio, Fannar, Frances, Frederick, Gastronok
 auto_exclude += Grum, Harold, Ijyb, Jessica, Jorgrun, Joseph, Kirke, Louise, Mara, Maud
-auto_exclude += Maurice, Menkaure, Mennas, Natasha, Nergalle, Nessos, Nikola, Pikel
+auto_exclude += Maurice, Menkaure, Mennas, Mlioglotl, Natasha, Nergalle, Nessos, Nikola, Pikel
 auto_exclude += Polyphemus, Prince Ribbit, Psyche, Roxanne, Saint Roka, Sigmund, Snorg
 auto_exclude += Sojobo, Sonja, Terence, Urug, Wiglaf, Xtahua, hog, lemure
 
@@ -583,3 +617,180 @@ function ready()
 
 end
 }
+
+
+
+##### GLYPHS ####
+## for console ##
+
+
+# mild interpolation of the alternate glyph sets for features
+
+display_char = wall:▒
+display_char = permawall:█
+display_char = wall_magic:░
+display_char = floor:·
+display_char = floor_magic:◦
+display_char = door_open:⸬
+display_char = door_closed:◼
+display_char = trap:^
+display_char = stairs_down:>
+display_char = stairs_up:<
+display_char = grate:⊞
+display_char = altar:π
+display_char = arch:∩
+display_char = fountain:⌠
+display_char = wavy:≈
+display_char = statue:⁑
+display_char = invis_exposed:∆
+display_char = item_detected:{
+display_char = item_orb:⊛
+display_char = item_rune:φ
+display_char = item_weapon:)
+display_char = item_armour:[
+display_char = item_wand:/
+display_char = item_food:%
+display_char = item_corpse:‰
+display_char = item_skeleton:‱
+display_char = item_scroll:?
+display_char = item_ring:=
+display_char = item_potion:!
+display_char = item_missile:(
+display_char = item_book:∞
+display_char = item_staff:|
+display_char = item_miscellany:}
+display_char = item_gold:$
+display_char = item_amulet:"
+display_char = cloud:❋
+display_char = cloud_weak:✼
+display_char = cloud_fading:✢
+display_char = cloud_terminal:∘
+display_char = tree:♣
+display_char = transporter:∈
+display_char = transporter_landing:∋
+display_char = fired_bolt:#
+display_char = fired_zap:*
+display_char = fired_burst:÷
+display_char = fired_debug:X
+display_char = fired_missile:⋆
+display_char = explosion:#
+display_char = frame_horiz:═
+display_char = frame_vert:║
+display_char = frame_top_left:╔
+display_char = frame_top_right:╗
+display_char = frame_bottom_left:╚
+display_char = frame_bottom_right:╝
+
+# fancier feature declarations
+
+# Walls and floors
+
+feature += crystal wall {░}
+feature += stone wall {≣}
+feature += metal wall {▓}
+feature += Golubria {Ω}
+feature += collapsed entrance {∩,∩,lightgrey}
+feature += escape hatch in the ceiling {«}
+feature += escape hatch in the floor {»}
+feature += web {✳}
+
+# Fancy god altars
+
+# "shattered"
+feature += Ashenzari {※}
+# "rough hewn"
+feature += Beogh {⁂}
+feature += Cheibriados {◴}
+feature += Dithmenos {ᚤ}
+# staff of aesculapius for the healer
+feature += Elyvilon {⚕}
+feature += Fedhas {❀}
+feature += Gozag {₪}
+# funeral urn of the ancestor
+feature += Hepliaklqana {⚱}
+feature += Jiyva {☣}
+feature += Kikubaaqudgha {☠}
+# "corrupted"
+feature += Lugonu {▚}
+# just because lowercase omega looks like flames
+feature += Makhleb {ω}
+feature += Nemelex Xobeh {⚜}
+feature += Okawaru {⚔}
+# meteorological symbol for thunderstorm
+feature += Qazlal {☈}
+feature += Ru {⚖}
+# mimic the tile
+feature += Sif Muna {♟}
+feature += Trog {†}
+feature += Uskayaw {♪}
+# 16 pointed star. "radiant"
+feature += Vehumet {✺}
+feature += Wu Jian {ॻ}
+feature += Xom {⸘}
+# a plain basalt altar sticks out in this flashy crowd
+feature += Yredelemnul {☗}
+# a quarter moon is the alchemical symbol for silver
+feature += Zin {☽}
+# alchemical gold
+feature += Shining One {☉}
+
+# Monsters
+mons := mon_glyph
+
+# Monsters that can be easy to miss
+mons += * : ✱
+mons += dancing weapon : lightcyan {
+mons += spectral weapon : lightcyan {
+
+# Fancy Demons
+mons += 1 : ➊
+mons += 2 : ➋
+mons += 3 : ➌
+mons += 4 : ➍
+mons += 5 : ➎
+mons += 6 : ➏
+mons += demonspawn blood saint : ➅
+mons += demonspawn warmonger : ➅
+mons += demonspawn corrupter : ➅
+mons += demonspawn black sun : ➅
+mons += & : ᚱ
+mons += R : ®
+
+# Terrible horrors
+mons += x : ᛣ
+mons += X : ᚸ
+mons += tentacled monstrosity : ᛤ
+mons += G : ಠ
+mons += glowing orange brain : ದ
+mons += u : ᛟ
+
+# Mummies and friends
+mons += M : 𓀾
+mons += W : צ
+mons += spectral thing : צ
+mons += L : ל
+
+# Constructs
+mons += 8 : ᛝ
+
+# Monsters that are really features
+mons += statue : ⁑
+mons += P : ❦
+
+# Except those that are not
+mons += wandering mushroom : ❡
+mons += deathcap : ❡
+mons += oklob plant : ❡
+mons += ballistomycete : ❡
+mons += burning bush : ❡
+mons += oklob sapling : ❡
+
+# Vortices
+mons += v : ¤
+
+# Hep to hep
+
+mons += ancestor : ಕ 
+mons += hexer : ಟ
+mons += knight : ಗ
+mons += battlemage : ಸ
