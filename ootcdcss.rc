@@ -50,6 +50,13 @@ autofight_stop = 65
 # bust out of nets while tabbing
 autofight_caught = true
 
+hp_warning = 50
+mp_warning = 50
+hp_colour = 100:green, 99:lightgrey, 80:yellow, 70:lightred, 50:red
+mp_colour = 100:green, 99:lightgrey, 80:yellow, 70:lightred, 50:red
+stat_colour = 3:red, 7:lightred
+cloud_status = true
+
 ### this section is sorta outdated cuz you can quiver spells
 ### that said, it could cool to use both automagic and spell quivering?
 ## Enable this if you want automagic attacks
@@ -59,13 +66,6 @@ autofight_caught = true
 ## automagic_stop = 50
 ## If set to true, resort to melee when automagic_stop is active
 ## automagic_fight = true
-
-hp_warning = 50
-mp_warning = 50
-hp_colour = 100:green, 99:lightgrey, 80:yellow, 70:lightred, 50:red
-mp_colour = 100:green, 99:lightgrey, 80:yellow, 70:lightred, 50:red
-stat_colour = 3:red, 7:lightred
-cloud_status = true
 
 ##############
 # Autotravel #
