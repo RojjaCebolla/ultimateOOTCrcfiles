@@ -1,7 +1,11 @@
-#### BIGGER TILES ####
-#### for webtiles ####
-# default size is 32
-tile_cell_pixels = 48
+## do you play console? is it hard to look at webtiles? ##
+## these options will make webtiles look like console:  ##
+# action_panel_glyphs = true
+# tile_display_mode = (tiles | glyphs | hybrid) <-- pick one of these
+
+#### BIGGER TILES for webtiles ####
+# default tile size is 32
+tile_cell_pixels     = 64
 
 ##############
 #   Basics   #
