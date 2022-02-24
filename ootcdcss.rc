@@ -33,20 +33,20 @@ skill_focus = true
 #############
 # make sure to adjust autofight settings to your playstyle!!!
 
-### if you enable the following stuff, tab becomes autofight_no_move...
-###hich can be annoying but it's uuuusually better to let them come to you,
-###instead of walking up to them
-### Do/don't throw stuff when autofighting
+### if you enable the following stuff, autofight (tab) becomes autofight_no_move...
+### which might enforce good habits. It's uuuusually better to let them come to you,
+### instead of walking up to them
+### Do/don't throw/shoot/cast (whatever's quivered) when no enemy is adjacent:
 ###autofight_throw = true
 ###autofight_throw_nomove = true
 
-# probably better to have a separate key for that behavior though.
+# maybe easier to have a separate key for that behavior though.
 #here it is:
 bindkey = [;] CMD_AUTOFIGHT_NOMOVE
 
 # If true, items are autofired stopping at the monsters feet (same as firing using .)
-# If false, missed projectiles continue to possibly hit whatever's behind the monster
-# or fall into the water.
+# If false, missed projectiles continue, possibly hitting whatever's beyond the monster
+# or falling into the water beyond the monster. (but not beyond LOS)
 autofight_fire_stop = false
 
 # Prevent me from tab-fighting to death by keeping this high
@@ -57,8 +57,8 @@ autofight_caught = true
 hp_warning = 50
 mp_warning = 50
 hp_colour = 100:green, 99:lightgrey, 80:yellow, 70:lightred, 50:red
-mp_colour = 100:green, 99:lightgrey, 80:yellow, 70:lightred, 50:red
-stat_colour = 3:red, 7:lightred
+mp_colour = 100:green, 95:lightgrey, 75:yellow, 55:lightred, 35:red
+stat_colour = 1: magenta, 3:red, 7:lightred, 24:lightgrey, 99:lightgreen
 cloud_status = true
 
 ### this section is sorta outdated cuz you can quiver spells
@@ -79,13 +79,13 @@ show_travel_trail = true
 travel_key_stop = true
 # stick somewhat closer to walls rather than waltz across open areas
 explore_wall_bias = 5
-# teleport to destination when traveling somewhere specific
+# appear instantly at destination when traveling to a spot. increase if you want to watch.
 travel_delay = -1
-# teleport to destination when autoexploring
+# appear instantly at destination when autoexploring. increase if you want to watch.
 explore_delay = -1
 
 #### doors can make loud noises. ####
-# set autoexplore to "avoid" opening doors if you'd prefer to do it yourself.
+# you can set autoexplore to "avoid" opening doors if you'd rather do it yourself.
 # this is important for stealthy types, also nice for general survival.
 # shadowrider38 would probably find it annoying, however
 # travel_open_doors = avoid
